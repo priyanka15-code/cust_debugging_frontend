@@ -9,7 +9,7 @@ import { environment } from '../environment/environment.prod';
 })
 export class ServiceService {
 
-  private apiurl = 'environment.apiBaseUrl';
+  private apiurl = environment.apiBaseUrl;
   constructor(private http: HttpClient) { }
 
   register(userdata: any ):Observable<any>{
