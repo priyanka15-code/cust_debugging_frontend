@@ -21,8 +21,8 @@ export class ServiceService {
       tap((response: any) => {
         if (response && response.token) {
           localStorage.setItem('token', response.token); 
-          console.log('Login successful, token saved');
-        }
+/*           console.log('Login successful, token saved');
+ */        }
       })
     );
   }
@@ -33,8 +33,8 @@ export class ServiceService {
       tap((response: any) => {
         if (response && response.token) {
           localStorage.setItem('token', response.token);
-          console.log('Developer login success, token saved');
-        }
+/*           console.log('Developer login success, token saved');
+ */        }
       })
     );
   }
@@ -46,7 +46,7 @@ export class ServiceService {
       tap((response: any) => {
         if (response && response.token) {
           localStorage.setItem('token', response.token);
-          console.log('Developer login in customer dashborad success, token saved');
+     /*      console.log('Developer login in customer dashborad success, token saved'); */
         }
       })
     )
@@ -62,7 +62,18 @@ export class ServiceService {
     const token = this.getToken();
     return token ? new HttpHeaders({ 'Authorization': `Bearer ${token}` }) : new HttpHeaders();
   }
-  
+  //console.log show and hidden
+  log(message: any) {
+    if (!environment.production) {
+      console.log(message);
+    }
+  }
+
+  error(message: any) {
+    if (!environment.production) {
+      console.error(message);
+    }
+  }
 
   getProtectedData(): Observable<any> {
     const headers = this.getAuthHeaders();
