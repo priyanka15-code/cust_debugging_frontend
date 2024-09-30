@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../environment/environment.prod';
 
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Observable, tap } from 'rxjs';
 })
 export class ServiceService {
 
-  private apiurl = 'http://localhost:3000/api/';
+  private apiurl = 'environment.apiBaseUrl';
   constructor(private http: HttpClient) { }
 
   register(userdata: any ):Observable<any>{
