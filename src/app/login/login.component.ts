@@ -42,6 +42,10 @@ export class LoginComponent implements OnInit  {
   }
 
   handleFormSubmit() {
+    if (this.passwordManagerActive) {
+      alert('Please close the password manager prompt and try again.');
+      return;
+    }
     if (this.showLogin) {
       this.login();
     } else {
