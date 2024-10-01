@@ -40,11 +40,11 @@ export class LoginComponent {
 
     this.api.register(userdata).subscribe(
       (response) => {
-        this.log('Register successful', response);
+        this.api.log('Register successful', );
 /*         console.log('Register successful', response);
  */      },
       (error) => {
-        this.log('Register failed', error);
+        this.api.log('Register failed',);
 /*         console.log('Register failed', error);
  */      }
     );
