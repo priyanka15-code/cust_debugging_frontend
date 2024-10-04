@@ -63,12 +63,12 @@ export class LoginComponent implements OnInit  {
 
     this.api.register(userdata).subscribe(
       (response) => {
-        this.api.log('Register successful',response );
+        this.api.log('Register successful','info',response );
 /*          console.log('Register successful', response);
  */       },
       (error) => {
         /* this.api.log('Register failed',); */
-         console.log('Register failed', error);
+         console.log('Register failed','error', error);
      }
     );
   }

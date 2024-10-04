@@ -83,28 +83,27 @@ export class ServiceService {
     }
   
     log(message: any, type: 'log' | 'warn' | 'info' | 'error', response?: any) {
-      // Get current user to check `isLog` value
       const user = this.getCurrentUser();
       
       if (user && user.isLog !== undefined) {
         if (user.isLog === true) {
           switch (type) {
             case 'log':
-              console.log('Message:', message);
+              console.log(message);
               if (response) console.log('Response:', response);
               break;
             case 'warn':
-              console.warn('Warning:', message);
+              console.warn(message);
               break;
             case 'info':
-              console.info('Info:', message);
+              console.info(message);
               break;
             case 'error':
-              console.error('Error:', message);
+              console.error(message);
               if (response) console.error('Response:', response);
               break;
             default:
-              console.log('Default log:', message);
+              console.log(message);
           }
         } else {
           console.log(); 
