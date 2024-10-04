@@ -96,7 +96,7 @@ export class ServiceService {
         console.log(); 
       }
     } else {
-      console.error(''); 
+      console.log(); 
     }
   }
 
