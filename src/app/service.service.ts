@@ -96,7 +96,7 @@ export class ServiceService {
         console.log(); 
       }
     } else {
-      console.error('Invalid user information received or isLog value is not defined.'); 
+      console.error(''); 
     }
   }
 
