@@ -9,7 +9,7 @@ import { environment } from '../environment/environment.prod';
 })
 export class ServiceService {
 
-  private apiurl = /*  environment.apiBaseUrl  */'http://localhost:3000/api/' ;
+  private apiurl =  environment.apiBaseUrl  /* 'http://localhost:3000/api/' */ ;
  private isLog: boolean = false;
   constructor(private http: HttpClient) { }
 
