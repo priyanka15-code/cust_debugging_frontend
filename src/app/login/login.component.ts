@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit  {
 
     this.api.register(userdata).subscribe(
       (response) => {
-        this.api.log('Register successful','log',response );
+        this.api.log('Register successful',response );
 /*          console.log('Register successful', response);
  */       },
       (error) => {
@@ -99,7 +99,7 @@ export class LoginComponent implements OnInit  {
             this.router.navigate(['/dashboard']);
           }
         }
-        this.api.log('Login successful', response);
+        this.api.log('Login successful','log',response);
       /*   console.log('Login successful', response); */
       },
       (error) => {
