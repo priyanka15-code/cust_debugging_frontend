@@ -25,7 +25,7 @@ export class AddProductComponent {
     }
     this.api.newProdct(productdata).subscribe(
       (response) => {
-        this.api.log("product add Successfull",response)
+        console.log("product add Successfull",response)
         this.router.navigate(['/dashboard/all-product'])
       },(error) => {
         console.log("fail to creating product ",error)
