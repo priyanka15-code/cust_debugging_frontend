@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
+import { environment } from 'src/environment/environment.prod';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { environment } from 'src/environment/environment.prod';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +12,14 @@ import { environment } from 'src/environment/environment.prod';
 export class LoginComponent implements OnInit  {
   showLogin = true;
   sName = '';
-  sEmail = 'abc@gmail.com';
+  sEmail = '@gmail.com';
   sPassword = '';
   loading = false; 
   passwordManagerActive = false;  
 
-  constructor(private api: ServiceService, private router: Router) {}
+  constructor(private api: ServiceService, private router: Router) {
+
+  }
 
 
   ngOnInit() {
@@ -86,6 +88,8 @@ export class LoginComponent implements OnInit  {
         if (response && response.token) {
           localStorage.setItem('token', response.token);
           localStorage.setItem('user', JSON.stringify(response.user));
+          this.disableConsoleInProduction();
+
         }
       })
     ).subscribe(
@@ -99,8 +103,8 @@ export class LoginComponent implements OnInit  {
             this.router.navigate(['/dashboard']);
           }
         }
-        this.api.log('Login successful','log',response);
-         console.log('Login successful', response); 
+/*         this.api.log('Login successful','log',response);
+ */         console.log('Login successful', response); 
       },
       (error) => {
         this.loading = false;  
@@ -110,53 +114,29 @@ export class LoginComponent implements OnInit  {
     );
   }
 
-}
 
-/* 
-const console = require('console');
 
-function prepare(color, ...logs) {
-    const aLogs = [];
-    for (let iter = 0; iter < logs.length; iter += 1) {
-        aLogs.push(`\x1b${color}`);
-        aLogs.push(typeof logs[iter] === 'object' ? JSON.stringify(logs[iter], null, 2) : logs[iter]);
+  // Move disableConsoleInProduction inside the class as a method
+  disableConsoleInProduction() {
+    if (environment.production) {
+      const userJson = localStorage.getItem('user');
+      const user = userJson ? JSON.parse(userJson) : null;
+
+/*       console.log('disableConsoleInProduction - User:', user);
+ */
+      // Check if the user exists and logging status is set
+      if (user && user.isLog === true) {
+        console.log('Log is enabled for this user');
+      } else {
+        const noop = function () {};
+        const methods: Array<'log' | 'warn' | 'info' | 'error'> = ['log', 'warn', 'info', 'error'];
+
+        methods.forEach((method) => {
+          (console as any)[method] = noop;
+        });
+        console.log('Console log disabled in production'); // Won't display if logging is disabled
+      }
     }
-    aLogs.push('\x1b[0m');
-    console.log(...aLogs);
+  }
+
 }
-
-const log = {
-    black: () => {},
-    red: () => {},
-    green: () => {},
-    yellow: () => {},
-    blue: () => {},
-    magenta: () => {},
-    cyan: () => {},
-    white: () => {},
-    console: () => {},
-    error: () => {},
-    warn: () => {},
-    table: () => {},
-    info: () => {},
-    trace: () => {},
-};
-
-if (process.env.NODE_ENV !== 'prod') log.debug = log;
-
-log.black = (...logs) => prepare('[30m', ...logs);
-log.red = (...logs) => prepare('[31m', ...logs);
-log.green = (...logs) => prepare('[32m', ...logs);
-log.yellow = (...logs) => prepare('[33m', ...logs);
-log.blue = (...logs) => prepare('[34m', ...logs);
-log.magenta = (...logs) => prepare('[35m', ...logs);
-log.cyan = (...logs) => prepare('[36m', ...logs);
-log.white = (...logs) => prepare('[37m', ...logs);
-log.console = console.log;
-log.error = console.error;
-log.warn = console.warn;
-log.table = console.table;
-log.info = console.info;
-log.trace = console.trace;
-
-module.exports = log; */
